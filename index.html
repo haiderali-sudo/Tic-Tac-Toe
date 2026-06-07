@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Tic Tac Toe .css">
+    <title>WellCome to My Game</title>
+    <style>
+        *{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    text-align: center;
+    background-color: #000000;
+    background-image: url(backgound2.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container{
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+}
+
+.O-Color{
+    color: #d41717;
+}
+
+.X-Color{
+    color: rgb(110, 213, 228);
+}
+
+h1{
+    font-size: 10vmin;
+    color: #FFFFFF;
+    text-shadow: 0 0 15px #543664, 0 0 30px #00FFFF;
+}
+
+.game{
+    height: 30vh;
+    width: 60vmin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vmin;
+}
+
+.box{
+    height: 18vmin;
+    width: 18vmin;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px white;
+    border-radius: 1rem;
+    /* text-shadow: 0 0 15px #ffffff; */
+    font-size: 8vmin;
+    background-color: rgba(0, 0, 0, 0.7);
+
+}
+
+.reset{
+    padding: 1rem;
+    font-size: 1.25rem;
+    background-color: #191913;
+    color: #ffffff;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px white;
+}
+
+.win{
+    font-size: 8vmin;
+    color: #FFFFFF;
+    text-shadow: 0 0 15px #543664, 0 0 30px #00FFFF;
+}
+
+.hide{
+    display: none;
+}
+
+.new-game{
+    padding: 1rem;
+    font-size: 1.25rem;
+    background-color: #191913;
+    color: #ffffff;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px white;
+}
+
+@media screen and (min-width:440px){
+    .container{
+        height: 50vh;
+    }
+    
+}
+
+@media screen and (min-width:1000px) {
+    .container{
+        height: 65vh;
+    }
+}
+    </style>
+</head>
+<body>
+    <main>
+        <div class="msgCon hide">
+            <h3 class="win">Winner</h3>
+            <br>
+            <button class="new-game">New Game</button>
+            <br>
+        </div>
+        <h1>Tic Tac Toe</h1>
+        <br>
+        <div class="container">
+        <div class="game">
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+        </div>
+        </div>
+        <button class="reset">Reset game</button>
+    </main>
+    
+    
+    <script>
+        alert("Welcome to my first Game")
+         
+        //   Acces the all things
+
+        let container = document.querySelector(".container");
+        let game = document.querySelector(".game");
+        let boxes = document.querySelectorAll(".box");
+        let resetBtn = document.querySelector(".reset");
+        let msgCon = document.querySelector(".msgCon");
+        let win = document.querySelector(".win");
+        let newGame = document.querySelector(".new-game");
+
+        //  Add Winning Pattrens
+        
+        const winningPatterns = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [2,4,6],
+            [0,4,8],
+    ];
+
+    let trunO = true;
+
+        // EvenListner
+
+        boxes.forEach((box) => {
+            box.addEventListener("click",() =>{
+                if(trunO){
+                    box.innerText = "O";
+                    trunO = false;
+                }
+                else{
+                    box.innerText = "X";
+                    box.classList.add("X-Color")
+                    
+                    trunO = true;
+                }
+                box.disabled = true;
+                
+                CheckWinner();
+            })
+        })
+
+        const boxDisabled = ()=>{
+            for (box of boxes){
+                box.disabled = true;
+            }
+        }
+
+        const boxEnabled = () =>{
+            for (box of boxes){
+                box.disabled = false;
+                box.innerText = "";
+
+            }
+        }
+
+        const showWinner = (Winner)=>{
+            win.innerText = `The Winner is ${Winner}`;
+            msgCon.classList.remove("hide");
+            boxDisabled();
+        }
+
+        const CheckWinner = ()=>{
+            for (let pattern of winningPatterns){
+                let P1 = boxes[pattern[0]].innerText;
+                let P2 = boxes[pattern[1]].innerText;
+                let P3 = boxes[pattern[2]].innerText;
+            
+            if(P1 != "" && P2 != "" && P3 != ""){
+                if(P1 === P2 && P2 === P3){
+                    showWinner(P1);
+                }
+            }
+        }
+
+    }
+
+
+    const resetGame = ()=>{
+        trunO = true;
+        boxEnabled();
+        msgCon.classList.add("hide");
+    } 
+    
+    newGame.addEventListener("click", resetGame);
+    resetBtn.addEventListener("click", resetGame);
+
+    </script>
+</body>
+</html>
