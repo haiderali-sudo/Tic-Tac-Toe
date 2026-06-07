@@ -184,18 +184,19 @@ h1{
         })
 
         const boxDisabled = ()=>{
-            for (box of boxes){
+            for (let box of boxes){
                 box.disabled = true;
             }
         }
 
         const boxEnabled = () =>{
-            for (box of boxes){
-                box.disabled = false;
-                box.innerText = "";
-
-            }
-        }
+    for (let box of boxes){
+        box.disabled = false;
+        box.innerText = "";
+        box.classList.remove("O");
+        box.classList.remove("X");
+    }
+}
 
         const showWinner = (Winner)=>{
             win.innerText = `The Winner is ${Winner}`;
