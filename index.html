@@ -26,11 +26,11 @@ body{
     justify-content: center;
 }
 
-.O-Color{
+.O{
     color: red !important;
 }
 
-.X-Color{
+.X{
     color: rgb(110, 213, 228) !important;
 }
 
@@ -59,7 +59,6 @@ h1{
     border-radius: 1rem;
     font-size: 8vmin;
     background-color: rgba(0, 0, 0, 0.7);
-    color:red;
     
 
 }
@@ -169,12 +168,12 @@ h1{
             box.addEventListener("click",() =>{
                 if(trunO){
                     box.innerText = "O";
-                    box.classList.add("O-Color");
+                    box.classList.add("Or");
                     trunO = false;
                 }
                 else{
                     box.innerText = "X";
-                    box.classList.add("X-Color")
+                    box.classList.add("X")
                     
                     trunO = true;
                 }
